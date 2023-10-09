@@ -1,37 +1,45 @@
 #include <stdio.h>
+#include <time.h>
 
-void selectionSort(int vetor[], int n) {
-    int i, j, minIndex, temp, trocas = 0; // Inicialize o contador de trocas como 0
+void selectionSort(int vetor[], int n, int *trocas) {
+    clock_t inicio = clock();
+    int i, j, minIndex, temp;
     for (i = 0; i < n - 1; i++) {
         minIndex = i;
 
-        // Encontra o índice do menor elemento na parte não ordenada da matriz
         for (j = i + 1; j < n; j++) {
             if (vetor[j] < vetor[minIndex]) {
                 minIndex = j;
             }
         }
 
-        // Troca o menor elemento encontrado com o primeiro elemento não ordenado
         temp = vetor[i];
         vetor[i] = vetor[minIndex];
         vetor[minIndex] = temp;
-        trocas++; // Incrementa o contador de trocas
+        (*trocas)++;
     }
-
-    printf("Número de trocas: %d\n", trocas); // Imprime o número total de trocas
+    clock_t fim = clock();
+    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Tempo de execução do Selection Sort: %.6f segundos\n", tempo);
 }
 
 int main() {
     int vetor[] = {64, 25, 12, 22, 11};
     int n = sizeof(vetor) / sizeof(vetor[0]);
+    int trocas = 0;
 
-    selectionSort(vetor, n);
-
-    printf("Vetor ordenado: \n");
+    printf("Vetor desordenado: \n");
     for (int i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
-    printf("\n");
+
+    selectionSort(vetor, n, &trocas);
+
+    printf("\nVetor ordenado: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", vetor[i]);
+    }
+
+    printf("\nNúmero de trocas: %d\n", trocas);
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 // Função para mesclar dois subarrays ordenados em um único array ordenado
 void merge(int arr[], int l, int m, int r, int *trocas) {
@@ -51,6 +52,7 @@ void merge(int arr[], int l, int m, int r, int *trocas) {
 
 // Função principal para executar o Merge Sort
 void mergeSort(int arr[], int l, int r, int *trocas) {
+    clock_t inicio = clock();
     if (l < r) {
         // Encontra o ponto médio do array
         int m = l + (r - l) / 2;
@@ -64,6 +66,9 @@ void mergeSort(int arr[], int l, int r, int *trocas) {
         // Mescla as duas metades classificadas
         merge(arr, l, m, r, trocas);
     }
+    clock_t fim = clock();
+    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Tempo de execução do Merge Sort: %.6f segundos\n", tempo);
 }
 
 int main() {

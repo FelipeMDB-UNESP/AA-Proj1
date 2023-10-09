@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 
 // Função para trocar dois elementos
 void swap(int* a, int* b) {
@@ -27,15 +28,17 @@ int partition(int vetor[], int low, int high, int* trocas) {
 }
 
 // Função principal para executar o Quick Sort
-void quickSort(int vetor[], int low, int high, int* trocas) {
+void quickSort(int arr[], int low, int high, int* trocas) {
+    clock_t inicio = clock();
     if (low < high) {
-        // Encontra o índice do pivô, o elemento em vetor[p] agora está no lugar certo
-        int pi = partition(vetor, low, high, trocas);
+        int pi = partition(arr, low, high, trocas);
 
-        // Classifica os elementos antes e depois da partição
-        quickSort(vetor, low, pi - 1, trocas);
-        quickSort(vetor, pi + 1, high, trocas);
+        quickSort(arr, low, pi - 1, trocas);
+        quickSort(arr, pi + 1, high, trocas);
     }
+    clock_t fim = clock();
+    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    printf("Tempo de execução do Quick Sort: %.6f segundos\n", tempo);
 }
 
 int main() {
