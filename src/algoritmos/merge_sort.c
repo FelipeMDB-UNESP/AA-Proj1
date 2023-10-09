@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // Função para mesclar dois subarrays ordenados em um único array ordenado
-void merge(int arr[], int l, int m, int r) {
+void merge(int arr[], int l, int m, int r, int *trocas) {
     int i, j, k;
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -29,6 +29,7 @@ void merge(int arr[], int l, int m, int r) {
         } else {
             arr[k] = R[j];
             j++;
+            (*trocas)++; // Incrementa o contador de trocas
         }
         k++;
     }
@@ -49,37 +50,39 @@ void merge(int arr[], int l, int m, int r) {
 }
 
 // Função principal para executar o Merge Sort
-void mergeSort(int arr[], int l, int r) {
+void mergeSort(int arr[], int l, int r, int *trocas) {
     if (l < r) {
         // Encontra o ponto médio do array
         int m = l + (r - l) / 2;
 
         // Classifica a metade esquerda
-        mergeSort(arr, l, m);
+        mergeSort(arr, l, m, trocas);
 
         // Classifica a metade direita
-        mergeSort(arr, m + 1, r);
+        mergeSort(arr, m + 1, r, trocas);
 
         // Mescla as duas metades classificadas
-        merge(arr, l, m, r);
+        merge(arr, l, m, r, trocas);
     }
 }
 
 int main() {
     int arr[] = {38, 27, 43, 3, 9, 82, 10};
     int n = sizeof(arr) / sizeof(arr[0]);
+    int trocas = 0; // Inicialize o contador de trocas como 0
 
     printf("Array desordenado: \n");
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
 
-    mergeSort(arr, 0, n - 1);
+    mergeSort(arr, 0, n - 1, &trocas);
 
     printf("\nArray ordenado: \n");
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
-    printf("\n");
+
+    printf("\nNúmero de trocas: %d\n", trocas); // Imprime o número total de trocas
     return 0;
 }

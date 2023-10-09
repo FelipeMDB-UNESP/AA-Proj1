@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void selectionSort(int vetor[], int n) {
-    int i, j, minIndex, temp;
+    int i, j, minIndex, temp, trocas = 0; // Inicialize o contador de trocas como 0
     for (i = 0; i < n - 1; i++) {
         minIndex = i;
 
@@ -16,7 +16,10 @@ void selectionSort(int vetor[], int n) {
         temp = vetor[i];
         vetor[i] = vetor[minIndex];
         vetor[minIndex] = temp;
+        trocas++; // Incrementa o contador de trocas
     }
+
+    printf("Número de trocas: %d\n", trocas); // Imprime o número total de trocas
 }
 
 int main() {
