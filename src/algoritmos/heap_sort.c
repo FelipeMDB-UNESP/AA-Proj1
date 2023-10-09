@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <sys/time.h>
 
 // Função para ajustar um heap máximo
 void maxHeapify(int vetor[], int n, int i, int *trocas) {
@@ -53,21 +54,31 @@ void heapSort(int vetor[], int n) {
     printf("Número de trocas: %d\n", trocas); // Imprime o número total de trocas
 }
 
+float diferenca_tempo(struct timeval *inicio, struct timeval *fim)
+{
+    return (fim->tv_sec - inicio->tv_sec) + 1e-6*(fim->tv_usec - inicio->tv_usec);
+}
+
 int main() {
     int vetor[] = {12, 11, 13, 5, 6, 7};
     int n = sizeof(vetor) / sizeof(vetor[0]);
+    struct timeval inicio, fim;
 
     printf("Vetor desordenado: \n");
     for (int i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
 
+    gettimeofday(&inicio, 0);
     heapSort(vetor, n);
+    gettimeofday(&fim, 0);
+
 
     printf("\nVetor ordenado: \n");
     for (int i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
     printf("\n");
+    printf("Tempo: %0.8f", diferenca_tempo(&inicio, &fim));
     return 0;
 }
