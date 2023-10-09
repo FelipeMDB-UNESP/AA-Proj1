@@ -1,5 +1,5 @@
-#ifndef SORTING_ALGORITHMS_H
-#define SORTING_ALGORITHMS_H
+#ifndef algoritmos_ordenacao
+#define algoritmos_ordenacao
 
 // Função para ordenar um array usando o algoritmo Insertion Sort
 void insertionSort(int arr[], int n);
@@ -13,4 +13,4 @@ void mergeSort(int arr[], int l, int r);
 // Função para ordenar um array usando o algoritmo Quick Sort
 void quickSort(int arr[], int low, int high);
 
-#endif /* SORTING_ALGORITHMS_H */
+#endif /* algoritmos_ordenacao */
