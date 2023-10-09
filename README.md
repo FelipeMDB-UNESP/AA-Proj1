@@ -1,6 +1,6 @@
-﻿Instituto de Geociências e Ciências Exatas (IGCE) ![](Aspose.Words.825e34bd-79a6-4e16-99b2-6d4cd3809ef0.001.png)
+﻿Instituto de Geociências e Ciências Exatas (IGCE)
 
-Departamento de Estatística, Matemática Aplicada e Computação ![](Aspose.Words.825e34bd-79a6-4e16-99b2-6d4cd3809ef0.002.png)
+Departamento de Estatística, Matemática Aplicada e Computação
 
 Análise de Algoritmos 
 
