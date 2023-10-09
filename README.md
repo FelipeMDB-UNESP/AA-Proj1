@@ -22,11 +22,11 @@ Trabalho 1 Análise Empírica
 - Discussão sobre os resultados obtidos e esperados, segundo análise teórica.
 - Análises de melhor/pior caso, assim como caso médio serão consideradas como um adicional.
 - Grupos:
-- Grupos de 4 componentes.
+  - Grupos de 4 componentes.
 - Material de Entrega/Apresentação:
-- Deverão  ser  entregues  os  Slides  da  Apresentação  e  Relatório  descrevendo  a metodologia  utilizada  (implementação,  amostragem,  ferramentas  estatísticas),  os resultados obtidos (tabelas, gráficos) e discussão sobre os resultados.
+  - Deverão  ser  entregues  os  Slides  da  Apresentação  e  Relatório  descrevendo  a metodologia  utilizada  (implementação,  amostragem,  ferramentas  estatísticas),  os resultados obtidos (tabelas, gráficos) e discussão sobre os resultados.
 - Data:
-- Conforme definido no Planejamento e Google Classroom.
+  - Conforme definido no Planejamento e Google Classroom.
 - Avaliação:
 
 Para fins de avaliação serão considerados os seguintes critérios:
