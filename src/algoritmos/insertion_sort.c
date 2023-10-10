@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include <time.h>
 
 // Função para gerar um vetor com valores aleatórios
@@ -19,8 +21,7 @@ int* gerarVetorAleatorio(int tamanho) {
     return vetor;
 }
 
-void insertionSort(int vetor[], int n, int *trocas) {
-    clock_t inicio = clock();
+void insertionSort(int *vetor, int n, int *trocas) {
     int i, chave, j;
     for (i = 1; i < n; i++) {
         chave = vetor[i];
@@ -33,28 +34,54 @@ void insertionSort(int vetor[], int n, int *trocas) {
         }
         vetor[j + 1] = chave;
     }
-    clock_t fim = clock();
-    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
-    printf("Tempo de execução do Insertion Sort: %.6f segundos\n", tempo);
 }
 
 int main() {
-    int vetor[] = {12, 11, 13, 5, 6};
-    int n = sizeof(vetor) / sizeof(vetor[0]);
-    int trocas = 0;
+    double vetorTempo[10]; // Vetor de Testes
+    double soma = 0;
+    double media = 0;
+    int i;
+    double numero = 10;
+    int qtdItems = 100000; // Numero de Elementos
+    int somaTroca = 0;
+    for (i = 0; i < numero; i++)
+    {
+        
+        int *vetor = gerarVetorAleatorio(qtdItems);
+        int n = qtdItems; // Tamanho do vetor
+        int trocas = 0; // Inicialize o contador de trocas como 0
 
-    printf("Vetor desordenado: \n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", vetor[i]);
+        clock_t inicio = clock();
+
+        insertionSort(vetor, n, &trocas);
+
+        clock_t fim = clock();
+        double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+
+        vetorTempo[i] = tempo;
+        soma = soma + tempo;
+        somaTroca = somaTroca + trocas;
+
+        free(vetor);
     }
 
-    insertionSort(vetor, n, &trocas);
+    media = soma/numero; // media
+    printf("\nTestes com %d elementos\n", qtdItems);
+    printf("\nMedia = %f\n", media);
 
-    printf("\nVetor ordenado: \n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", vetor[i]);
+    double variacoes = 0;
+    int j = 0;
+    for (j = 0; j < numero; j++) {
+        double v = vetorTempo[j] - media;
+        variacoes = variacoes + v * v;
     }
+    
+    double sigma = sqrt(variacoes / numero);
 
-    printf("\nNúmero de trocas: %d\n", trocas);
+    printf("Desvio padrao = %f\n", sigma);
+
+    somaTroca = somaTroca / numero;
+
+    printf("Media Trocas = %d\n", somaTroca);
     return 0;
 }
