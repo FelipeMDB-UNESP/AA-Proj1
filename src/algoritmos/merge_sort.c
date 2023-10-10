@@ -2,7 +2,6 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
-#define QUANT 10000000
 
 // Função para gerar um vetor com valores aleatórios
 int* gerarVetorAleatorio(int tamanho) {
@@ -118,7 +117,8 @@ int main() {
     double media = 0;
     int i;
     double numero = 10;
-    int qtdItems = QUANT; // Numero de Elementos
+    int qtdItems = 100; // Numero de Elementos
+    int somaTroca = 0;
     for (i = 0; i < numero; i++)
     {
         
@@ -135,6 +135,7 @@ int main() {
 
         vetorTempo[i] = tempo;
         soma = soma + tempo;
+        somaTroca = somaTroca + trocas;
 
         free(vetor);
     }
@@ -153,6 +154,10 @@ int main() {
     double sigma = sqrt(variacoes / numero);
 
     printf("Desvio padrao = %f\n", sigma);
+
+    somaTroca = somaTroca / numero;
+
+    printf("Media Trocas = %d\n", somaTroca);
     
 
 
