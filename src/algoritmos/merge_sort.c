@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <time.h>
+#include <math.h>
 #include <stdlib.h>
+#define QUANT 10000000
 
 // Função para gerar um vetor com valores aleatórios
 int* gerarVetorAleatorio(int tamanho) {
@@ -93,10 +95,7 @@ void mergeSort(int *vetor, int l, int r, int *trocas) {
 
 int main() {
 
-    int qtdItems = 10000000;
-    int *vetor = gerarVetorAleatorio(qtdItems);
-    int n = qtdItems; // Tamanho do vetor
-    int trocas = 0; // Inicialize o contador de trocas como 0
+    
 
     // printf("Vetor desordenado:\n");
     // for (int i = 0; i < n; i++) {
@@ -104,23 +103,84 @@ int main() {
     // }
 
     
-    clock_t inicio = clock();
-
-    mergeSort(vetor, 0, n - 1, &trocas);
-
-    clock_t fim = clock();
-    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+    
 
     // printf("\nVetor ordenado:\n");
     // for (int i = 0; i < n; i++) {
     //     printf("%d ", vetor[i]);
     // }
 
-    printf("\nNúmero de trocas: %d\n", trocas); // Imprime o número total de trocas
-    printf("Tempo de execução do Merge Sort: %.6f segundos\n", tempo);
+   // printf("\nNúmero de trocas: %d\n", trocas); // Imprime o número total de trocas
+   // printf("Tempo de execução do Merge Sort: %.6f segundos\n", tempo);
 
+    double vetorTempo[10]; // Vetor de Testes
+    double soma = 0;
+    double media = 0;
+    int i;
+    double numero = 10;
+    int qtdItems = QUANT; // Numero de Elementos
+    for (i = 0; i < numero; i++)
+    {
+        
+        int *vetor = gerarVetorAleatorio(qtdItems);
+        int n = qtdItems; // Tamanho do vetor
+        int trocas = 0; // Inicialize o contador de trocas como 0
+
+        clock_t inicio = clock();
+
+        mergeSort(vetor, 0, n - 1, &trocas);
+
+        clock_t fim = clock();
+        double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+
+        vetorTempo[i] = tempo;
+        soma = soma + tempo;
+
+        free(vetor);
+    }
+
+    media = soma/numero; // media
+    printf("\nTestes com %d elementos\n", qtdItems);
+    printf("\nMedia = %f\n", media);
+
+    double variacoes = 0;
+    int j = 0;
+    for (j = 0; j < numero; j++) {
+        double v = vetorTempo[j] - media;
+        variacoes = variacoes + v * v;
+    }
+    
+    double sigma = sqrt(variacoes / numero);
+
+    printf("Desvio padrao = %f\n", sigma);
+    
+
+
+
+
+
+
+
+
+
+
+    // printf("⠀⠀⠀⠀⠀⣀⣴⣶⣶⣶⣶⣶⣶⣶⣦⣄⣀⠀⠀⠀⠀⠀\n");
+    // printf("⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀\n");
+    // printf("⠀⠀⣿⣿⣿⣿⣿⣿⠉⠀⠀⠀⠀⠀⠉⠉⠉⠙⢷⡄⠀⠀\n");
+    // printf("⠀⣼⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀\n");
+    // printf("⠀⣿⣿⣿⣿⣿⡿⠛⠁⠀⣠⣾⣿⣶⣤⣤⣄⠀⠀⠀⡇⠀\n");
+    // printf("⠀⣿⣿⣿⣿⣿⠁⠀⠀⠚⠉⣴⣶⣦⡌⠙⠛⠀⣶⣶⣽⡄\n");
+    // printf("⣴⡿⠉⠻⣿⣿⠀⠀⠀⠀⠀⠀⠀⠉⠙⠀⠀⢆⣤⣭⡙⡇\n");
+    // printf("⣿⠀⠉⠇⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠑⡄⠀⡇\n");
+    // printf("⠻⣍⠑⠇⣿⣿⣿⣷⣦⣄⡀⣀⣠⣤⣼⣦⣀⣠⣤⡇⠀⡇\n");
+    // printf("⠀⣿⡟⢲⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣴⠇\n");
+    // printf("⠀⣿⡇⣼⣿⣿⣿⣿⣿⣿⣿⣷⣆⣀⠀⠉⠉⢿⣿⡿\n");
+    // printf("⠀⣿⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀\n");
+    // printf("⠀⣿⠀⠀⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀\n");
+    // printf("⣼⡿⠀⠀⠀⠀⠀⠉⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀\n");
+    // printf("⣿⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀\n");
     // Libere a memória alocada para o vetor
-    free(vetor);
+    
 
     return 0;
 }
