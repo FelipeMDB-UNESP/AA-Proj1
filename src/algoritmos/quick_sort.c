@@ -48,12 +48,12 @@ int partition(int *vetor, int low, int high, int* trocas) {
 }
 
 // Função principal para executar o Quick Sort
-void quickSort(int *arr, int low, int high, int* trocas) {
+void quickSort(int *vetor, int low, int high, int* trocas) {
     if (low < high) {
-        int pi = partition(arr, low, high, trocas);
+        int pi = partition(vetor, low, high, trocas);
 
-        quickSort(arr, low, pi - 1, trocas);
-        quickSort(arr, pi + 1, high, trocas);
+        quickSort(vetor, low, pi - 1, trocas);
+        quickSort(vetor, pi + 1, high, trocas);
     }
 }
 

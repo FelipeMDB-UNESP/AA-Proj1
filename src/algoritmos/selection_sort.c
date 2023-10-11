@@ -19,7 +19,7 @@ int* gerarVetorAleatorio(int tamanho) {
     return vetor;
 }
 
-void selectionSort(int vetor[], int n, int *trocas) {
+void selectionSort(int *vetor, int n, int *trocas) {
     clock_t inicio = clock();
     int i, j, minIndex, temp;
     for (i = 0; i < n - 1; i++) {
@@ -40,6 +40,7 @@ void selectionSort(int vetor[], int n, int *trocas) {
     double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
     printf("Tempo de execução do Selection Sort: %.6f segundos\n", tempo);
 }
+
 
 int main() {
     int vetor[] = {64, 25, 12, 22, 11};

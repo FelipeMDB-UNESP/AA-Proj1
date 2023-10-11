@@ -19,8 +19,7 @@ int* gerarVetorAleatorio(int tamanho) {
     return vetor;
 }
 
-// Função para ajustar um heap máximo
-void maxHeapify(int vetor[], int n, int i, int *trocas) {
+void maxHeapify(int *vetor, int n, int i, int *trocas) {
     int maior = i;    // Inicializa o maior como a raiz
     int esquerda = 2 * i + 1; // Índice do filho esquerdo
     int direita = 2 * i + 2;  // Índice do filho direito
@@ -48,11 +47,11 @@ void maxHeapify(int vetor[], int n, int i, int *trocas) {
     }
 }
 
-// Função para realizar o Heap Sort
-void heapSort(int vetor[], int n) {
+
+void heapSort(int *vetor, int n) {
     int trocas = 0; // Inicialize o contador de trocas como 0
 
-    // Constrói o heap máximo (revetoranja o vetor)
+    // Constrói o heap máximo (revertendo o vetor)
     for (int i = n / 2 - 1; i >= 0; i--) {
         maxHeapify(vetor, n, i, &trocas);
     }
@@ -71,6 +70,7 @@ void heapSort(int vetor[], int n) {
 
     printf("Número de trocas: %d\n", trocas); // Imprime o número total de trocas
 }
+
 
 float diferenca_tempo(struct timeval *inicio, struct timeval *fim)
 {
