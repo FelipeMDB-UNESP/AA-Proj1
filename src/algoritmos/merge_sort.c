@@ -22,7 +22,7 @@ int* gerarVetorAleatorio(int tamanho) {
 }
 
 // Função para mesclar dois subvetores ordenados em um único vetor ordenado
-void merge(int *vetor, int l, int m, int r, int *trocas) {
+void merge(int *vetor, int l, int m, int r, long *trocas) {
     int i, j, k;
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -76,7 +76,7 @@ void merge(int *vetor, int l, int m, int r, int *trocas) {
 }
 
 // Função principal para executar o Merge Sort
-void mergeSort(int *vetor, int l, int r, int *trocas) {
+void mergeSort(int *vetor, int l, int r, long *trocas) {
     if (l < r) {
         // Encontra o ponto médio do vetor
         int m = l + (r - l) / 2;
@@ -100,31 +100,24 @@ int main() {
     // for (int i = 0; i < n; i++) {
     //     printf("%d ", vetor[i]);
     // }
-
-    
-    
-
-    // printf("\nVetor ordenado:\n");
-    // for (int i = 0; i < n; i++) {
-    //     printf("%d ", vetor[i]);
-    // }
+ 
 
    // printf("\nNúmero de trocas: %d\n", trocas); // Imprime o número total de trocas
    // printf("Tempo de execução do Merge Sort: %.6f segundos\n", tempo);
 
-    double vetorTempo[10]; // Vetor de Testes
+    double vetorTempo[20]; // Vetor de Testes
     double soma = 0;
     double media = 0;
     int i;
-    double numero = 10;
-    int qtdItems = 100; // Numero de Elementos
-    int somaTroca = 0;
+    double numero = 20;
+    int qtdItems = 10000000; // Numero de Elementos
+    long somaTroca = 0;
     for (i = 0; i < numero; i++)
     {
         
         int *vetor = gerarVetorAleatorio(qtdItems);
         int n = qtdItems; // Tamanho do vetor
-        int trocas = 0; // Inicialize o contador de trocas como 0
+        long trocas = 0; // Inicialize o contador de trocas como 0
 
         clock_t inicio = clock();
 
@@ -157,35 +150,13 @@ int main() {
 
     somaTroca = somaTroca / numero;
 
-    printf("Media Trocas = %d\n", somaTroca);
+    printf("Media Trocas = %ld\n", somaTroca);
     
 
-
-
-
-
-
-
-
-
-
-    // printf("⠀⠀⠀⠀⠀⣀⣴⣶⣶⣶⣶⣶⣶⣶⣦⣄⣀⠀⠀⠀⠀⠀\n");
-    // printf("⠀⠀⣀⣴⣾⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀\n");
-    // printf("⠀⠀⣿⣿⣿⣿⣿⣿⠉⠀⠀⠀⠀⠀⠉⠉⠉⠙⢷⡄⠀⠀\n");
-    // printf("⠀⣼⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⠀\n");
-    // printf("⠀⣿⣿⣿⣿⣿⡿⠛⠁⠀⣠⣾⣿⣶⣤⣤⣄⠀⠀⠀⡇⠀\n");
-    // printf("⠀⣿⣿⣿⣿⣿⠁⠀⠀⠚⠉⣴⣶⣦⡌⠙⠛⠀⣶⣶⣽⡄\n");
-    // printf("⣴⡿⠉⠻⣿⣿⠀⠀⠀⠀⠀⠀⠀⠉⠙⠀⠀⢆⣤⣭⡙⡇\n");
-    // printf("⣿⠀⠉⠇⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠑⡄⠀⡇\n");
-    // printf("⠻⣍⠑⠇⣿⣿⣿⣷⣦⣄⡀⣀⣠⣤⣼⣦⣀⣠⣤⡇⠀⡇\n");
-    // printf("⠀⣿⡟⢲⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣴⠇\n");
-    // printf("⠀⣿⡇⣼⣿⣿⣿⣿⣿⣿⣿⣷⣆⣀⠀⠉⠉⢿⣿⡿\n");
-    // printf("⠀⣿⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀\n");
-    // printf("⠀⣿⠀⠀⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀\n");
-    // printf("⣼⡿⠀⠀⠀⠀⠀⠉⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀\n");
-    // printf("⣿⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀\n");
-    // Libere a memória alocada para o vetor
-    
-
+    // printf("\nVetor ordenado:\n");
+    // for (int i = 0; i < n; i++) {
+    //     printf("%d ", vetor[i]);
+    // }
+ 
     return 0;
 }

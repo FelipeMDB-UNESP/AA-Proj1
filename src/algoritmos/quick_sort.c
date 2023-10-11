@@ -30,7 +30,7 @@ void swap(int* a, int* b) {
 
 // Função que escolhe o último elemento como pivô, coloca o elemento pivô em sua posição correta no vetor
 // e coloca todos os elementos menores que o pivô à esquerda e todos os elementos maiores à direita.
-int partition(int *vetor, int low, int high, int* trocas) {
+int partition(int *vetor, int low, int high, unsigned long* trocas) {
     int pivot = vetor[high];  // Pivô
     int i = (low - 1);     // Índice do menor elemento
 
@@ -48,7 +48,7 @@ int partition(int *vetor, int low, int high, int* trocas) {
 }
 
 // Função principal para executar o Quick Sort
-void quickSort(int *vetor, int low, int high, int* trocas) {
+void quickSort(int *vetor, int low, int high, unsigned long* trocas) {
     if (low < high) {
         int pi = partition(vetor, low, high, trocas);
 
@@ -58,19 +58,19 @@ void quickSort(int *vetor, int low, int high, int* trocas) {
 }
 
 int main() {
-    double vetorTempo[10]; // Vetor de Testes
+    double vetorTempo[20]; // Vetor de Testes
     double soma = 0;
     double media = 0;
     int i;
-    double numero = 10;
-    int qtdItems = 1000000; // Numero de Elementos
-    int somaTroca = 0;
+    double numero = 20;
+    int qtdItems = 10000000; // Numero de Elementos
+    unsigned long somaTroca = 0;
     for (i = 0; i < numero; i++)
     {
         
         int *vetor = gerarVetorAleatorio(qtdItems);
         int n = qtdItems; // Tamanho do vetor
-        int trocas = 0; // Inicialize o contador de trocas como 0
+        unsigned long trocas = 0; // Inicialize o contador de trocas como 0
 
         clock_t inicio = clock();
 
@@ -103,6 +103,6 @@ int main() {
 
     somaTroca = somaTroca / numero;
 
-    printf("Media Trocas = %d\n", somaTroca);
+    printf("Media Trocas = %ld\n", somaTroca);
     return 0;
 }

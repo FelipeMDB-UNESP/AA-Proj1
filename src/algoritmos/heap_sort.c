@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
 #include <sys/time.h>
 
 // Função para gerar um vetor com valores aleatórios
@@ -19,7 +22,7 @@ int* gerarVetorAleatorio(int tamanho) {
     return vetor;
 }
 
-void maxHeapify(int *vetor, int n, int i, int *trocas) {
+void maxHeapify(int *vetor, int n, int i, unsigned long *trocas) {
     int maior = i;    // Inicializa o maior como a raiz
     int esquerda = 2 * i + 1; // Índice do filho esquerdo
     int direita = 2 * i + 2;  // Índice do filho direito
@@ -48,12 +51,11 @@ void maxHeapify(int *vetor, int n, int i, int *trocas) {
 }
 
 
-void heapSort(int *vetor, int n) {
-    int trocas = 0; // Inicialize o contador de trocas como 0
+void heapSort(int *vetor, int n, unsigned long* trocas) {
 
     // Constrói o heap máximo (revertendo o vetor)
     for (int i = n / 2 - 1; i >= 0; i--) {
-        maxHeapify(vetor, n, i, &trocas);
+        maxHeapify(vetor, n, i, trocas);
     }
 
     // Extrai elementos um por um do heap
@@ -62,41 +64,60 @@ void heapSort(int *vetor, int n) {
         int temp = vetor[0];
         vetor[0] = vetor[i];
         vetor[i] = temp;
-        trocas++; // Incrementa o contador de trocas
+        (*trocas)++; // Incrementa o contador de trocas
 
         // Chama maxHeapify no heap reduzido
-        maxHeapify(vetor, i, 0, &trocas);
+        maxHeapify(vetor, i, 0, trocas);
     }
-
-    printf("Número de trocas: %d\n", trocas); // Imprime o número total de trocas
 }
 
-
-float diferenca_tempo(struct timeval *inicio, struct timeval *fim)
-{
-    return (fim->tv_sec - inicio->tv_sec) + 1e-6*(fim->tv_usec - inicio->tv_usec);
-}
 
 int main() {
-    int vetor[] = {12, 11, 13, 5, 6, 7};
-    int n = sizeof(vetor) / sizeof(vetor[0]);
-    struct timeval inicio, fim;
+    double vetorTempo[20]; // Vetor de Testes
+    double soma = 0;
+    double media = 0;
+    int i;
+    double numero = 20;
+    int qtdItems = 10000000; // Numero de Elementos
+    unsigned long somaTroca = 0;
+    for (i = 0; i < numero; i++)
+    {
+        
+        int *vetor = gerarVetorAleatorio(qtdItems);
+        int n = qtdItems; // Tamanho do vetor
+        unsigned long trocas = 0; // Inicialize o contador de trocas como 0
 
-    printf("Vetor desordenado: \n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", vetor[i]);
+        clock_t inicio = clock();
+
+        heapSort(vetor, n, &trocas);
+
+        clock_t fim = clock();
+        double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC;
+
+        vetorTempo[i] = tempo;
+        soma = soma + tempo;
+        somaTroca = somaTroca + trocas;
+
+        free(vetor);
     }
 
-    gettimeofday(&inicio, 0);
-    heapSort(vetor, n);
-    gettimeofday(&fim, 0);
+    media = soma/numero; // media
+    printf("\nTestes com %d elementos\n", qtdItems);
+    printf("\nMedia = %f\n", media);
 
-
-    printf("\nVetor ordenado: \n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", vetor[i]);
+    double variacoes = 0;
+    int j = 0;
+    for (j = 0; j < numero; j++) {
+        double v = vetorTempo[j] - media;
+        variacoes = variacoes + v * v;
     }
-    printf("\n");
-    printf("Tempo: %0.8f", diferenca_tempo(&inicio, &fim));
+    
+    double sigma = sqrt(variacoes / numero);
+
+    printf("Desvio padrao = %f\n", sigma);
+
+    somaTroca = somaTroca / numero;
+
+    printf("Media Trocas = %ld\n", somaTroca);
     return 0;
 }

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <time.h>
 
+
 // Função para gerar um vetor com valores aleatórios
 int* gerarVetorAleatorio(int tamanho) {
     int* vetor = (int*)malloc(tamanho * sizeof(int));
@@ -21,7 +22,7 @@ int* gerarVetorAleatorio(int tamanho) {
     return vetor;
 }
 
-void insertionSort(int *vetor, int n, int *trocas) {
+void insertionSort(int *vetor, int n, unsigned long *trocas) {
     int i, chave, j;
     for (i = 1; i < n; i++) {
         chave = vetor[i];
@@ -37,19 +38,19 @@ void insertionSort(int *vetor, int n, int *trocas) {
 }
 
 int main() {
-    double vetorTempo[10]; // Vetor de Testes
+    double vetorTempo[1]; // Vetor de Testes
     double soma = 0;
     double media = 0;
     int i;
-    double numero = 10;
-    int qtdItems = 100000; // Numero de Elementos
-    int somaTroca = 0;
+    double numero = 1;
+    int qtdItems = 100; // Numero de Elementos
+    unsigned long somaTroca = 0;
     for (i = 0; i < numero; i++)
     {
         
         int *vetor = gerarVetorAleatorio(qtdItems);
         int n = qtdItems; // Tamanho do vetor
-        int trocas = 0; // Inicialize o contador de trocas como 0
+        unsigned long trocas = 0; // Inicialize o contador de trocas como 0
 
         clock_t inicio = clock();
 
@@ -82,6 +83,7 @@ int main() {
 
     somaTroca = somaTroca / numero;
 
-    printf("Media Trocas = %d\n", somaTroca);
+    printf("Media Trocas = %ld\n", somaTroca);
+    printf("max rand = %ld", RAND_MAX);
     return 0;
 }
